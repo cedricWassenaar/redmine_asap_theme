@@ -1,0 +1,31 @@
+<%= render(layout: "common/authentication_layout") do %>
+  <h2 class="text-xl font-semibold mb-4">
+    <%= l(:setting_twofa) %>
+  </h2>
+
+  <p class="mb-6 text-gray-600">
+    <%= l 'twofa_label_enter_otp' %>
+  </p>
+
+  <%= form_tag(
+        { action: 'twofa' },
+        { id: 'twofa_form',
+          onsubmit: 'return keepAnchorOnSignIn(this);' }) do %>
+
+    <div class="mb-6">
+      <label for="twofa_code">
+        <%= l 'twofa_label_code' %>
+      </label>
+
+      <%= text_field_tag :twofa_code,
+                         nil,
+                         autocomplete: 'one-time-code',
+                         autofocus: true %>
+    </div>
+
+    <%= submit_tag l(:button_login),
+                   id: 'login-submit',
+                   name: :submit_otp,
+                   class: 'w-full cursor-pointer text-white bg-blue-700 hover:bg-blue-800 rounded text-sm px-3 py-2' %>
+  <% end %>
+<% end %>
